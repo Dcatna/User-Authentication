@@ -1,7 +1,7 @@
 .main-container{
     background-color: #ffff;
     width: 30%;
-    border-radius: 4px;
+    border-radius: 16px;
     height: 500px;
     text-align: center;
     margin-top: 80px;
@@ -16,4 +16,16 @@ main{
 .create-account{
     margin-top: 20px;
 }
+
+@keyframes jiggle {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .jiggle-animation {
+    animation: jiggle 0.5s ease;
+  }
 

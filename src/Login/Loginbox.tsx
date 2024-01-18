@@ -18,6 +18,11 @@ const schema = yup.object().shape({
 })
 
 const Loginbox = () => {
+    const [isJiggling, setIsJiggling] = useState(false);
+    const handleButtonClick = () => {
+        setIsJiggling(true);
+        setTimeout(() => setIsJiggling(false), 500); // 500ms is the duration of the animation
+      };
     const navigate = useNavigate();
     const [name, setName] = useState("")
     const{register,handleSubmit,formState: { errors }} =useForm<IFormInput>({
@@ -67,14 +72,15 @@ async function submitForm (formData : IFormInput) {
                     marginTop:'6px'
                 }} {...register('password')}/>
                 <p>{errors.password?.message}</p>
-                <button type = "submit"style={{
-                width:'70%',
-                height:'40px',
-                backgroundColor:'#8b5cf6',
-                border:'none',
-                borderRadius:'4px',
-    
-            }}>Login..</button>
+                <button onClick = {errors.password || errors.email? handleButtonClick : () => {}} 
+                className={isJiggling ? 'jiggle-animation' : ''} type = "submit" 
+                    style={{
+                        width:'70%',
+                        height:'40px',
+                        backgroundColor:'#8b5cf6',
+                        border:'none',
+                        borderRadius:'4px',
+                }}>Login..</button>
             </form>
             <p>By logging in you agree to terms and conditions;)</p>
             
