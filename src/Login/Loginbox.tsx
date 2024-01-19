@@ -14,7 +14,7 @@ interface IFormInput {
 
 const schema = yup.object().shape({
     email: yup.string().email().required(),
-    password: yup.string().min(3).max(15).required()
+    password: yup.string().min(6).max(15).required()
 })
 
 const Loginbox = () => {
@@ -28,7 +28,11 @@ const Loginbox = () => {
     const{register,handleSubmit,formState: { errors }} =useForm<IFormInput>({
         resolver:yupResolver(schema),
       });
-
+    function showAlertAfterAnimation(message : string) {
+        setTimeout(() => {
+            alert(message);
+        }, 100);
+    }
 async function submitForm (formData : IFormInput) {
     try {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -45,10 +49,13 @@ async function submitForm (formData : IFormInput) {
         }
         navigate("/home")
       } catch (error) {
+        handleButtonClick()
         if (error instanceof Error) {  // Type guard
-            alert(error.message);
+            showAlertAfterAnimation(error.message)
+            
           } else {
             // Handle cases where error is not an instance of Error
+            handleButtonClick()
             console.error("An unknown error occurred", error);
           }
       }
@@ -86,6 +93,7 @@ async function submitForm (formData : IFormInput) {
             
             <div className='create-account' style={{
                 marginTop:'20px',
+                paddingBottom:"20px"
             }}>
                 <p>Dont have an account yet??</p>
                 <Link to="/signup">Create Account</Link>

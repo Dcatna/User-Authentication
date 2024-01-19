@@ -2,13 +2,13 @@
     background-color: #ffff;
     width: 30%;
     border-radius: 16px;
-    height: 500px;
+    height: auto;
     text-align: center;
     margin-top: 80px;
 
 
 }
-main{
+.main{
     justify-content: center;
     display: flex;
     align-items: center;  
